@@ -6,6 +6,8 @@
 <title>DirectGaming — Links Diretos MediaFire</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <!-- Netlify Identity Widget (carregado de forma assíncrona) -->
 <script>
 (function(){
@@ -445,28 +447,58 @@ footer{border-top:1px solid var(--border);background:var(--surface);padding:40px
 </div>
 
 <script>
-var GAMES = [
-  {id:'21',title:'Fortnite',         platform:'PC', category:'Acao',       size:'29 GB',  isOnline:true, isFree:true, isFeatured:true,  downloads:98000,  downloadUrl:'https://www.epicgames.com/fortnite/pt-BR/download',          cover:'https://cdn2.unrealengine.com/fortnite-chapter-5-season-4-absolute-doom-blade-1920x1080-b6e2ebad6068.jpg',                                                    wide:'https://cdn2.unrealengine.com/fortnite-chapter-5-season-4-absolute-doom-blade-1920x1080-b6e2ebad6068.jpg'},
-  {id:'22',title:'Warframe',         platform:'PC', category:'Acao',       size:'35 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:54000,  downloadUrl:'https://www.warframe.com/download',                          cover:'https://cdn.akamai.steamstatic.com/steam/apps/230410/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/230410/header.jpg'},
-  {id:'23',title:'Path of Exile',    platform:'PC', category:'RPG',        size:'22 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:41000,  downloadUrl:'https://www.pathofexile.com/download',                       cover:'https://cdn.akamai.steamstatic.com/steam/apps/238960/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/238960/header.jpg'},
-  {id:'24',title:'Genshin Impact',   platform:'PC', category:'RPG',        size:'80 GB',  isOnline:true, isFree:true, isFeatured:true,  downloads:87000,  downloadUrl:'https://genshin.hoyoverse.com/pt-pt/download',               cover:'https://upload.wikimedia.org/wikipedia/en/thumb/9/97/Genshin_Impact.jpg/250px-Genshin_Impact.jpg',                                                          wide:'https://upload.wikimedia.org/wikipedia/en/thumb/9/97/Genshin_Impact.jpg/250px-Genshin_Impact.jpg'},
-  {id:'25',title:'Valorant',         platform:'PC', category:'Acao',       size:'22 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:76000,  downloadUrl:'https://playvalorant.com/pt-br/download/',                   cover:'https://www.riotgames.com/darkroom/1440/d0807e131a84bca1b1e1b33f83e4a04a:8fe4bd0b8d4c80bfd0f87d28a45fffbd/valorant-offwhitelaunch-keyart.jpg',              wide:'https://www.riotgames.com/darkroom/1440/d0807e131a84bca1b1e1b33f83e4a04a:8fe4bd0b8d4c80bfd0f87d28a45fffbd/valorant-offwhitelaunch-keyart.jpg'},
-  {id:'26',title:'League of Legends',platform:'PC', category:'Estrategia', size:'22 GB',  isOnline:true, isFree:true, isFeatured:true,  downloads:120000, downloadUrl:'https://signup.leagueoflegends.com/pt-br/signup/index',      cover:'https://www.leagueoflegends.com/static/logo-1200-589b3ef693ce5b33e359d37f4c1f730c.jpg',                                                                   wide:'https://www.leagueoflegends.com/static/open-graph-2e582ae9fae8b0b396ca46ff21fd47a8.jpg'},
-  {id:'27',title:'Counter-Strike 2', platform:'PC', category:'Acao',       size:'25 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:110000, downloadUrl:'https://www.counter-strike.net/cs2',                         cover:'https://cdn.akamai.steamstatic.com/steam/apps/730/library_600x900.jpg',                                                                                     wide:'https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg'},
-  {id:'28',title:'Dota 2',           platform:'PC', category:'Estrategia', size:'20 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:89000,  downloadUrl:'https://www.dota2.com/play',                                 cover:'https://cdn.akamai.steamstatic.com/steam/apps/570/library_600x900.jpg',                                                                                     wide:'https://cdn.akamai.steamstatic.com/steam/apps/570/header.jpg'},
-  {id:'29',title:'Apex Legends',     platform:'PC', category:'Acao',       size:'50 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:67000,  downloadUrl:'https://www.ea.com/pt-br/games/apex-legends/play-now',       cover:'https://media.contentapi.ea.com/content/dam/apex-legends/images/2019/01/apex-featured-image-16x9.jpg.adapt.crop16x9.320w.jpg',                               wide:'https://media.contentapi.ea.com/content/dam/apex-legends/images/2019/01/apex-featured-image-16x9.jpg.adapt.crop16x9.320w.jpg'},
-  {id:'30',title:'Rocket League',    platform:'PC', category:'Esporte',    size:'20 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:58000,  downloadUrl:'https://www.rocketleague.com/pt/download',                   cover:'https://cdn.akamai.steamstatic.com/steam/apps/252950/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/252950/header.jpg'},
-  {id:'31',title:'Fall Guys',        platform:'PC', category:'Acao',       size:'8 GB',   isOnline:true, isFree:true, isFeatured:false, downloads:44000,  downloadUrl:'https://www.fallguys.com/pt-BR',                             cover:'https://cdn.akamai.steamstatic.com/steam/apps/1097150/library_600x900.jpg',                                                                                 wide:'https://cdn.akamai.steamstatic.com/steam/apps/1097150/header.jpg'},
-  {id:'32',title:'Destiny 2',        platform:'PC', category:'Acao',       size:'90 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:39000,  downloadUrl:'https://www.bungie.net/7/pt-br/destiny/newlight',            cover:'https://www.bungie.net/img/destiny_content/pgcr/ritual_survival.jpg',                                                                                       wide:'https://www.bungie.net/img/destiny_content/pgcr/ritual_survival.jpg'},
-  {id:'33',title:'Brawlhalla',       platform:'PC', category:'Luta',       size:'1.5 GB', isOnline:true, isFree:true, isFeatured:false, downloads:31000,  downloadUrl:'https://www.brawlhalla.com/download',                        cover:'https://cdn.akamai.steamstatic.com/steam/apps/291550/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/291550/header.jpg'},
-  {id:'34',title:'Team Fortress 2',  platform:'PC', category:'Acao',       size:'15 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:28000,  downloadUrl:'https://www.teamfortress.com/download',                      cover:'https://cdn.akamai.steamstatic.com/steam/apps/440/library_600x900.jpg',                                                                                     wide:'https://cdn.akamai.steamstatic.com/steam/apps/440/header.jpg'},
-  {id:'35',title:'War Thunder',      platform:'PC', category:'Acao',       size:'80 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:35000,  downloadUrl:'https://warthunder.com/pt/registration',                     cover:'https://cdn.akamai.steamstatic.com/steam/apps/236390/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/236390/header.jpg'},
-  {id:'36',title:'Honkai: Star Rail', platform:'PC',category:'RPG',        size:'30 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:52000,  downloadUrl:'https://hsr.hoyoverse.com/pt-pt/download',                   cover:'https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Honkai_Star_Rail_game_logo.jpg/250px-Honkai_Star_Rail_game_logo.jpg',                                   wide:'https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Honkai_Star_Rail_game_logo.jpg/250px-Honkai_Star_Rail_game_logo.jpg'},
-  {id:'37',title:'Wuthering Waves',  platform:'PC', category:'RPG',        size:'30 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:38000,  downloadUrl:'https://wutheringwaves.kurogames.com/en/main',               cover:'https://cdn.akamai.steamstatic.com/steam/apps/2448720/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/2448720/header.jpg'},
-  {id:'38',title:'Enlisted',         platform:'PC', category:'Acao',       size:'50 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:18000,  downloadUrl:'https://enlisted.net/pt/download/',                          cover:'https://cdn.akamai.steamstatic.com/steam/apps/1488841/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/1488841/header.jpg'},
-  {id:'39',title:'Smite 2',          platform:'PC', category:'Acao',       size:'30 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:14000,  downloadUrl:'https://www.smitegame.com/play-for-free',                    cover:'https://cdn.akamai.steamstatic.com/steam/apps/2441430/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/2441430/header.jpg'},
-  {id:'40',title:'PUBG: Battlegrounds',platform:'PC',category:'Acao',      size:'30 GB',  isOnline:true, isFree:true, isFeatured:false, downloads:65000,  downloadUrl:'https://pubg.com/pt-br/landing/pc/',                         cover:'https://cdn.akamai.steamstatic.com/steam/apps/578080/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/578080/header.jpg'}
+// ================================================================
+// 🔧 SUPABASE — cole suas credenciais aqui
+var SUPABASE_URL  = 'https://ezqognswyqkwmxrprxqg.supabase.co';
+var SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6cW9nbnN3eXFrd214cnByeHFnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2NzU4NDAsImV4cCI6MjA5NTI1MTg0MH0.UMhB5OVIOiDBhcPuuNXH3qU8I4erZ4yWUNkkjikvNi4';
+// ================================================================
+
+var _sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// Jogos padrão (gratuitos) — servem como seed inicial no Supabase
+var SEED_GAMES = [
+  {title:'Fortnite',          platform:'PC', category:'Acao',       size:'29 GB',  is_online:true, is_free:true, is_featured:true,  downloads:98000,  download_url:'https://www.epicgames.com/fortnite/pt-BR/download',         cover:'https://cdn2.unrealengine.com/fortnite-chapter-5-season-4-absolute-doom-blade-1920x1080-b6e2ebad6068.jpg',                                                    wide:'https://cdn2.unrealengine.com/fortnite-chapter-5-season-4-absolute-doom-blade-1920x1080-b6e2ebad6068.jpg'},
+  {title:'Warframe',          platform:'PC', category:'Acao',       size:'35 GB',  is_online:true, is_free:true, is_featured:false, downloads:54000,  download_url:'https://www.warframe.com/download',                         cover:'https://cdn.akamai.steamstatic.com/steam/apps/230410/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/230410/header.jpg'},
+  {title:'Path of Exile',     platform:'PC', category:'RPG',        size:'22 GB',  is_online:true, is_free:true, is_featured:false, downloads:41000,  download_url:'https://www.pathofexile.com/download',                      cover:'https://cdn.akamai.steamstatic.com/steam/apps/238960/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/238960/header.jpg'},
+  {title:'Genshin Impact',    platform:'PC', category:'RPG',        size:'80 GB',  is_online:true, is_free:true, is_featured:true,  downloads:87000,  download_url:'https://genshin.hoyoverse.com/pt-pt/download',              cover:'https://upload.wikimedia.org/wikipedia/en/thumb/9/97/Genshin_Impact.jpg/250px-Genshin_Impact.jpg',                                                          wide:'https://upload.wikimedia.org/wikipedia/en/thumb/9/97/Genshin_Impact.jpg/250px-Genshin_Impact.jpg'},
+  {title:'Valorant',          platform:'PC', category:'Acao',       size:'22 GB',  is_online:true, is_free:true, is_featured:false, downloads:76000,  download_url:'https://playvalorant.com/pt-br/download/',                  cover:'https://www.riotgames.com/darkroom/1440/d0807e131a84bca1b1e1b33f83e4a04a:8fe4bd0b8d4c80bfd0f87d28a45fffbd/valorant-offwhitelaunch-keyart.jpg',              wide:'https://www.riotgames.com/darkroom/1440/d0807e131a84bca1b1e1b33f83e4a04a:8fe4bd0b8d4c80bfd0f87d28a45fffbd/valorant-offwhitelaunch-keyart.jpg'},
+  {title:'League of Legends', platform:'PC', category:'Estrategia', size:'22 GB',  is_online:true, is_free:true, is_featured:true,  downloads:120000, download_url:'https://signup.leagueoflegends.com/pt-br/signup/index',     cover:'https://www.leagueoflegends.com/static/logo-1200-589b3ef693ce5b33e359d37f4c1f730c.jpg',                                                                   wide:'https://www.leagueoflegends.com/static/open-graph-2e582ae9fae8b0b396ca46ff21fd47a8.jpg'},
+  {title:'Counter-Strike 2',  platform:'PC', category:'Acao',       size:'25 GB',  is_online:true, is_free:true, is_featured:false, downloads:110000, download_url:'https://www.counter-strike.net/cs2',                        cover:'https://cdn.akamai.steamstatic.com/steam/apps/730/library_600x900.jpg',                                                                                     wide:'https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg'},
+  {title:'Dota 2',            platform:'PC', category:'Estrategia', size:'20 GB',  is_online:true, is_free:true, is_featured:false, downloads:89000,  download_url:'https://www.dota2.com/play',                                cover:'https://cdn.akamai.steamstatic.com/steam/apps/570/library_600x900.jpg',                                                                                     wide:'https://cdn.akamai.steamstatic.com/steam/apps/570/header.jpg'},
+  {title:'Apex Legends',      platform:'PC', category:'Acao',       size:'50 GB',  is_online:true, is_free:true, is_featured:false, downloads:67000,  download_url:'https://www.ea.com/pt-br/games/apex-legends/play-now',      cover:'https://media.contentapi.ea.com/content/dam/apex-legends/images/2019/01/apex-featured-image-16x9.jpg.adapt.crop16x9.320w.jpg',                               wide:'https://media.contentapi.ea.com/content/dam/apex-legends/images/2019/01/apex-featured-image-16x9.jpg.adapt.crop16x9.320w.jpg'},
+  {title:'Rocket League',     platform:'PC', category:'Esporte',    size:'20 GB',  is_online:true, is_free:true, is_featured:false, downloads:58000,  download_url:'https://www.rocketleague.com/pt/download',                  cover:'https://cdn.akamai.steamstatic.com/steam/apps/252950/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/252950/header.jpg'},
+  {title:'Fall Guys',         platform:'PC', category:'Acao',       size:'8 GB',   is_online:true, is_free:true, is_featured:false, downloads:44000,  download_url:'https://www.fallguys.com/pt-BR',                            cover:'https://cdn.akamai.steamstatic.com/steam/apps/1097150/library_600x900.jpg',                                                                                 wide:'https://cdn.akamai.steamstatic.com/steam/apps/1097150/header.jpg'},
+  {title:'Destiny 2',         platform:'PC', category:'Acao',       size:'90 GB',  is_online:true, is_free:true, is_featured:false, downloads:39000,  download_url:'https://www.bungie.net/7/pt-br/destiny/newlight',           cover:'https://www.bungie.net/img/destiny_content/pgcr/ritual_survival.jpg',                                                                                       wide:'https://www.bungie.net/img/destiny_content/pgcr/ritual_survival.jpg'},
+  {title:'Brawlhalla',        platform:'PC', category:'Luta',       size:'1.5 GB', is_online:true, is_free:true, is_featured:false, downloads:31000,  download_url:'https://www.brawlhalla.com/download',                       cover:'https://cdn.akamai.steamstatic.com/steam/apps/291550/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/291550/header.jpg'},
+  {title:'Team Fortress 2',   platform:'PC', category:'Acao',       size:'15 GB',  is_online:true, is_free:true, is_featured:false, downloads:28000,  download_url:'https://www.teamfortress.com/download',                     cover:'https://cdn.akamai.steamstatic.com/steam/apps/440/library_600x900.jpg',                                                                                     wide:'https://cdn.akamai.steamstatic.com/steam/apps/440/header.jpg'},
+  {title:'War Thunder',       platform:'PC', category:'Acao',       size:'80 GB',  is_online:true, is_free:true, is_featured:false, downloads:35000,  download_url:'https://warthunder.com/pt/registration',                    cover:'https://cdn.akamai.steamstatic.com/steam/apps/236390/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/236390/header.jpg'},
+  {title:'Honkai: Star Rail',  platform:'PC', category:'RPG',       size:'30 GB',  is_online:true, is_free:true, is_featured:false, downloads:52000,  download_url:'https://hsr.hoyoverse.com/pt-pt/download',                  cover:'https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Honkai_Star_Rail_game_logo.jpg/250px-Honkai_Star_Rail_game_logo.jpg',                                   wide:'https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/Honkai_Star_Rail_game_logo.jpg/250px-Honkai_Star_Rail_game_logo.jpg'},
+  {title:'Wuthering Waves',   platform:'PC', category:'RPG',        size:'30 GB',  is_online:true, is_free:true, is_featured:false, downloads:38000,  download_url:'https://wutheringwaves.kurogames.com/en/main',              cover:'https://cdn.akamai.steamstatic.com/steam/apps/2448720/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/2448720/header.jpg'},
+  {title:'Enlisted',          platform:'PC', category:'Acao',       size:'50 GB',  is_online:true, is_free:true, is_featured:false, downloads:18000,  download_url:'https://enlisted.net/pt/download/',                         cover:'https://cdn.akamai.steamstatic.com/steam/apps/1488841/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/1488841/header.jpg'},
+  {title:'Smite 2',           platform:'PC', category:'Acao',       size:'30 GB',  is_online:true, is_free:true, is_featured:false, downloads:14000,  download_url:'https://www.smitegame.com/play-for-free',                   cover:'https://cdn.akamai.steamstatic.com/steam/apps/2441430/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/2441430/header.jpg'},
+  {title:'PUBG: Battlegrounds',platform:'PC', category:'Acao',      size:'30 GB',  is_online:true, is_free:true, is_featured:false, downloads:65000,  download_url:'https://pubg.com/pt-br/landing/pc/',                        cover:'https://cdn.akamai.steamstatic.com/steam/apps/578080/library_600x900.jpg',                                                                                  wide:'https://cdn.akamai.steamstatic.com/steam/apps/578080/header.jpg'}
 ];
+
+// Converte linha do Supabase para o formato interno do site
+function dbToGame(row){
+  return {
+    id:          String(row.id),
+    title:       row.title,
+    platform:    row.platform,
+    category:    row.category,
+    size:        row.size,
+    isOnline:    row.is_online,
+    isFree:      row.is_free,
+    isFeatured:  row.is_featured,
+    downloads:   row.downloads || 0,
+    downloadUrl: row.download_url || '',
+    cover:       row.cover || '',
+    wide:        row.wide  || '',
+    _isCustom:   row.is_custom || false
+  };
+}
+
+var GAMES = [];
 
 var CATEGORIES = ['Todos','Gratuito','Acao','RPG','Corrida','Estrategia','Aventura','Esporte','Luta'];
 var CAT_LABELS  = {'Todos':'Todos','Gratuito':'🆓 Gratuitos','Acao':'Ação','RPG':'RPG','Corrida':'Corrida','Estrategia':'Estratégia','Aventura':'Aventura','Esporte':'Esporte','Luta':'Luta'};
@@ -523,7 +555,7 @@ function openModal(id){
   document.getElementById('modal-cover').src = g.wide||g.cover;
   document.getElementById('modal-cover').alt = g.title;
   document.getElementById('modal-title').textContent = g.title;
-  document.getElementById('modal-meta').textContent = g.platform+' • '+CAT_LABELS[g.category]||g.category;
+  document.getElementById('modal-meta').textContent = g.platform+' • '+(CAT_LABELS[g.category]||g.category);
   document.getElementById('modal-info').innerHTML =
     '<span>Tamanho:</span> '+g.size+'&nbsp;&nbsp;|&nbsp;&nbsp;'+
     '<span>Status:</span> '+(g.isOnline ? '✅ Online' : '❌ Offline')+'&nbsp;&nbsp;|&nbsp;&nbsp;'+
@@ -847,7 +879,7 @@ function showToast(msg, err){
   setTimeout(function(){ t.classList.remove('show'); }, 2800);
 }
 
-function addGame(){
+async function addGame(){
   var title     = document.getElementById('af-title').value.trim();
   var url       = document.getElementById('af-url').value.trim();
   var platform  = document.getElementById('af-platform').value;
@@ -858,28 +890,42 @@ function addGame(){
   var imgUrl    = _imgDataUrl || document.getElementById('af-img-url').value.trim();
 
   if(!title){ showToast('⚠️ Informe o nome do jogo!', true); return; }
-  if(!url)  { showToast('⚠️ Informe o link MediaFire!', true); return; }
+  if(!url)  { showToast('⚠️ Informe o link!', true); return; }
 
   var cover = imgUrl || 'https://placehold.co/300x400/111118/39ff7e?text='+encodeURIComponent(title);
 
-  var newGame = {
-    id: String(NEXT_ID++),
-    title: title,
-    platform: platform,
-    category: category,
-    size: size,
-    isOnline: true,
-    isFree: false,
-    isFeatured: featured,
-    downloads: downloads,
-    downloadUrl: url,
-    cover: cover,
-    wide: cover,
-    _isCustom: true
+  var btn = document.querySelector('.admin-submit');
+  btn.textContent = '⏳ Salvando...';
+  btn.disabled = true;
+
+  var row = {
+    title:        title,
+    platform:     platform,
+    category:     category,
+    size:         size,
+    is_online:    true,
+    is_free:      true,
+    is_featured:  featured,
+    downloads:    downloads,
+    download_url: url,
+    cover:        cover,
+    wide:         cover,
+    is_custom:    true
   };
 
-  CUSTOM_GAMES.push(newGame);
+  var result = await _sb.from('games').insert([row]).select().single();
+
+  btn.textContent = '✅ Adicionar Jogo à Lista';
+  btn.disabled = false;
+
+  if(result.error){
+    showToast('❌ Erro ao salvar: ' + result.error.message, true);
+    return;
+  }
+
+  var newGame = dbToGame(result.data);
   GAMES.push(newGame);
+  CUSTOM_GAMES.push(newGame);
 
   // Reset form
   document.getElementById('af-title').value = '';
@@ -895,10 +941,12 @@ function addGame(){
   renderGrid();
   renderFeatured();
   renderAdminList();
-  showToast('✅ "'+title+'" adicionado com sucesso!');
+  showToast('✅ "'+title+'" adicionado e salvo!');
 }
 
-function removeCustomGame(id){
+async function removeCustomGame(id){
+  var result = await _sb.from('games').delete().eq('id', id);
+  if(result.error){ showToast('❌ Erro ao remover: '+result.error.message, true); return; }
   GAMES = GAMES.filter(function(g){ return g.id !== id; });
   CUSTOM_GAMES = CUSTOM_GAMES.filter(function(g){ return g.id !== id; });
   renderGrid();
@@ -931,26 +979,38 @@ function renderAdminList(){
   list.innerHTML = html;
 }
 
-// Override openModal to support custom MediaFire direct links
-var _origOpenModal = openModal;
-openModal = function(id){
-  var g = null;
-  for(var i = 0; i < GAMES.length; i++){ if(GAMES[i].id === id){ g = GAMES[i]; break; } }
-  if(!g) return;
-  _origOpenModal(id);
-  // If it's a custom game with a direct MediaFire link, update button
-  if(g._isCustom && g.downloadUrl){
-    var btn = document.getElementById('modal-mf-btn');
-    btn.textContent = '📥 Download Direto — MediaFire';
-    btn.href = g.downloadUrl;
-    btn.style.background = '';
-  }
-};
+// ─── INIT — carrega jogos do Supabase ──────────────────────────────────────
+async function init(){
+  renderFilters();
 
-// Init
-renderFilters();
-renderGrid();
-renderFeatured();
+  // Mostra loading no grid
+  document.getElementById('games-grid').innerHTML =
+    '<div style="grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted);font-size:15px">⏳ Carregando jogos...</div>';
+
+  var result = await _sb.from('games').select('*').order('downloads', {ascending: false});
+
+  if(result.error || !result.data || result.data.length === 0){
+    // Se banco vazio ou erro, usa seed local
+    if(result.error) console.warn('Supabase:', result.error.message);
+    GAMES = SEED_GAMES.map(function(g, i){
+      return Object.assign({}, g, {
+        id: String(i+1),
+        isOnline: g.is_online, isFree: g.is_free,
+        isFeatured: g.is_featured, downloadUrl: g.download_url,
+        _isCustom: false
+      });
+    });
+  } else {
+    GAMES = result.data.map(dbToGame);
+    CUSTOM_GAMES = GAMES.filter(function(g){ return g._isCustom; });
+  }
+
+  renderGrid();
+  renderFeatured();
+  renderAdminList();
+}
+
+init();
 </script>
 </body>
 </html>
